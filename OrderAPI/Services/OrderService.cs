@@ -60,6 +60,15 @@ namespace OrderAPI.Services
                 UserId = orderDto.UserId,
                 Quantity = orderDto.Quantity
             }, "orderCreated");
+            
+            _messageBus.SendMessage(new
+            {
+                OrderId = order.OrderId,
+                ProductId = orderDto.ProductId,
+                UserId = orderDto.UserId,
+                Quantity = orderDto.Quantity
+            }, "orderCreateds");
+
             return _mapper.Map<OrderReadDto>(order);
         }
 

@@ -252,3 +252,4 @@ D:\FullStack\.net\microservice\ProductAPI\obj\Debug\net8.0\ProductAPI.genruntime
 D:\FullStack\.net\microservice\ProductAPI\obj\Debug\net8.0\ref\ProductAPI.dll
 D:\FullStack\.net\microservice\ProductAPI\bin\Debug\net8.0\RabbitMQ.Client.dll
 D:\FullStack\.net\microservice\ProductAPI\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\FullStack\.net\microservice\ProductAPI\obj\Debug\net8.0\ProductAPI.sourcelink.json

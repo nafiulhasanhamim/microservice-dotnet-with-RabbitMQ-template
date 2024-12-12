@@ -126,3 +126,4 @@ D:\FullStack\.net\microservice\OrderAPI\obj\Debug\net8.0\OrderAPI.genruntimeconf
 D:\FullStack\.net\microservice\OrderAPI\obj\Debug\net8.0\ref\OrderAPI.dll
 D:\FullStack\.net\microservice\OrderAPI\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\FullStack\.net\microservice\OrderAPI\bin\Debug\net8.0\RabbitMQ.Client.dll
+D:\FullStack\.net\microservice\OrderAPI\obj\Debug\net8.0\OrderAPI.sourcelink.json
