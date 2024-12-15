@@ -67,10 +67,7 @@ namespace ProductAPI.Services
 
         public async Task<bool> UpdateStockAsync(OrderDTO eventMessage)
         {
-            Console.WriteLine("UpdateStockAsync", eventMessage.ProductId);
-            // var product = await _context.Products.FindAsync(eventMessage.ProductId);
             var product = await _context.Products.FirstOrDefaultAsync(p => p.ProductId == Guid.Parse(eventMessage.ProductId));
-
             if (product == null) _messageBus.SendMessage(eventMessage, "stockFailed");
             else if (product.Quantity >= eventMessage.Quantity)
             {
@@ -81,7 +78,6 @@ namespace ProductAPI.Services
             }
             else if (product.Quantity < eventMessage.Quantity)
             {
-                product.Quantity -= eventMessage.Quantity;
                 _messageBus.SendMessage(eventMessage, "stockFailed");
             }
             return true;

@@ -9,6 +9,7 @@ using OrderAPI.data;
 using OrderAPI.Interfaces;
 using OrderAPI.RabbitMQ;
 using OrderAPI.Services;
+using ProductAPI.Messaging;
 var builder = WebApplication.CreateBuilder(args);
 
 

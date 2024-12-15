@@ -46,20 +46,6 @@ namespace OrderAPI.Services
             order.OrderDate = DateTime.UtcNow;
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
-            var message = new
-            {
-                OrderId = order.OrderId,
-                ProductId = (orderDto.ProductId),
-                UserId = orderDto.UserId,
-                Quantity = orderDto.Quantity
-            };
-            _messageBus.SendMessage(new
-            {
-                OrderId = order.OrderId,
-                ProductId = orderDto.ProductId,
-                UserId = orderDto.UserId,
-                Quantity = orderDto.Quantity
-            }, "orderCreated");
             
             _messageBus.SendMessage(new
             {
@@ -67,7 +53,23 @@ namespace OrderAPI.Services
                 ProductId = orderDto.ProductId,
                 UserId = orderDto.UserId,
                 Quantity = orderDto.Quantity
-            }, "orderCreateds");
+            }, "OrderExchange");
+
+            // _messageBus.SendMessage(new
+            // {
+            //     OrderId = order.OrderId,
+            //     ProductId = orderDto.ProductId,
+            //     UserId = orderDto.UserId,
+            //     Quantity = orderDto.Quantity
+            // }, "orderCreated");
+
+            // _messageBus.SendMessage(new
+            // {
+            //     OrderId = order.OrderId,
+            //     ProductId = orderDto.ProductId,
+            //     UserId = orderDto.UserId,
+            //     Quantity = orderDto.Quantity
+            // }, "orderCreateds");
 
             return _mapper.Map<OrderReadDto>(order);
         }
