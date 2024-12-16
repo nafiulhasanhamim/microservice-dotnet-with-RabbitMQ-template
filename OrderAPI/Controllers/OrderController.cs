@@ -20,6 +20,7 @@ namespace OrderAPI.Controllers
             _orderService = orderService;
         }
 
+        // [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
