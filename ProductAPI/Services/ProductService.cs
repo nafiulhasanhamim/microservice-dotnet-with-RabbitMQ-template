@@ -68,17 +68,17 @@ namespace ProductAPI.Services
         public async Task<bool> UpdateStockAsync(OrderDTO eventMessage)
         {
             var product = await _context.Products.FirstOrDefaultAsync(p => p.ProductId == Guid.Parse(eventMessage.ProductId));
-            if (product == null) _messageBus.SendMessage(eventMessage, "stockFailed");
+            if (product == null) _messageBus.SendMessage(eventMessage, "stockFailed", "exchange");
             else if (product.Quantity >= eventMessage.Quantity)
             {
                 product.Quantity -= eventMessage.Quantity;
                 _context.Products.Update(product);
                 await _context.SaveChangesAsync();
-                _messageBus.SendMessage(eventMessage, "stockUpdated");
+                _messageBus.SendMessage(eventMessage, "stockUpdated", "exchange");
             }
             else if (product.Quantity < eventMessage.Quantity)
             {
-                _messageBus.SendMessage(eventMessage, "stockFailed");
+                _messageBus.SendMessage(eventMessage, "stockFailed", "exchange");
             }
             return true;
         }

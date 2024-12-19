@@ -3765,11 +3765,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FullStack\\.net\\microservice\\ProductAPI\\ProductAPI.csproj",
+      "projectUniqueName": "D:\\FullStack\\.net\\microservice-template\\ProductAPI\\ProductAPI.csproj",
       "projectName": "ProductAPI",
-      "projectPath": "D:\\FullStack\\.net\\microservice\\ProductAPI\\ProductAPI.csproj",
+      "projectPath": "D:\\FullStack\\.net\\microservice-template\\ProductAPI\\ProductAPI.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\FullStack\\.net\\microservice\\ProductAPI\\obj\\",
+      "outputPath": "D:\\FullStack\\.net\\microservice-template\\ProductAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"

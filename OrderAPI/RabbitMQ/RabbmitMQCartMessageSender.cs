@@ -75,42 +75,48 @@ namespace OrderAPI.RabbitMQ
         private readonly string _password;
         private IConnection _connection;
 
-        public RabbmitMQCartMessageSender()
+        public RabbmitMQCartMessageSender(IConfiguration configuration)
         {
-            _hostName = "localhost";
-            _password = "guest";
-            _username = "guest";
+            _hostName = configuration.GetSection("RabbitMQ")["HostName"];
+            _password = configuration.GetSection("RabbitMQ")["Password"];
+            _username = configuration.GetSection("RabbitMQ")["UserName"];
         }
 
-        public void SendMessage(object message, string exchangeName = "DefaultExchange")
+        public void SendMessage(object message, string name, string type)
         {
-            if (string.IsNullOrEmpty(exchangeName))
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentException("Exchange name cannot be null or empty.", nameof(exchangeName));
+                throw new ArgumentException("name cannot be null or empty.", nameof(name));
             }
 
             if (ConnectionExists())
             {
                 using var channel = _connection.CreateModel();
+                if (name == "exchange")
+                {
+                    channel.ExchangeDeclare(exchange: name, type: ExchangeType.Fanout);
 
-                // Dynamically declare the exchange
-                channel.ExchangeDeclare(exchange: exchangeName, type: ExchangeType.Fanout);
+                    var json = JsonConvert.SerializeObject(message);
+                    var body = Encoding.UTF8.GetBytes(json);
 
-                // Serialize the message to JSON
-                var json = JsonConvert.SerializeObject(message);
-                var body = Encoding.UTF8.GetBytes(json);
-
-                // Publish the message to the dynamic exchange
-                channel.BasicPublish(
-                    exchange: exchangeName,
-                    routingKey: "", // Routing key is ignored for fanout exchanges
-                    basicProperties: null,
-                    body: body
-                );
+                    channel.BasicPublish(
+                        exchange: name,
+                        routingKey: "", // Routing key is ignored for fanout exchanges
+                        basicProperties: null,
+                        body: body
+                    );
+                    Console.WriteLine($"Message sent to {type} {name}: {json}");
+                }
+                else if (type == "queue")
+                {
+                    channel.QueueDeclare(name, false, false, false, null);
+                    var json = JsonConvert.SerializeObject(message);
+                    var body = Encoding.UTF8.GetBytes(json);
+                    channel.BasicPublish(exchange: "", routingKey: name, null, body: body);
+                }
 
             }
         }
-
         private void CreateConnection()
         {
             try

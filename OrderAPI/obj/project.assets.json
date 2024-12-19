@@ -3765,11 +3765,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FullStack\\.net\\microservice\\OrderAPI\\OrderAPI.csproj",
+      "projectUniqueName": "D:\\FullStack\\.net\\microservice-template\\OrderAPI\\OrderAPI.csproj",
       "projectName": "OrderAPI",
-      "projectPath": "D:\\FullStack\\.net\\microservice\\OrderAPI\\OrderAPI.csproj",
+      "projectPath": "D:\\FullStack\\.net\\microservice-template\\OrderAPI\\OrderAPI.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\FullStack\\.net\\microservice\\OrderAPI\\obj\\",
+      "outputPath": "D:\\FullStack\\.net\\microservice-template\\OrderAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"

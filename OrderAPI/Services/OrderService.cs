@@ -53,7 +53,7 @@ namespace OrderAPI.Services
                 ProductId = orderDto.ProductId,
                 UserId = orderDto.UserId,
                 Quantity = orderDto.Quantity
-            }, "OrderExchange");
+            }, "OrderExchange", "exchange");
 
             // _messageBus.SendMessage(new
             // {

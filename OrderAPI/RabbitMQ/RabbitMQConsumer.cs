@@ -45,10 +45,10 @@
                 // using (var scope = _serviceProvider.CreateScope())
                 // {
                 //     var orderService = scope.ServiceProvider.GetRequiredService<IOrderService>();
-                //     if (eventMessage == null)
-                //     {
-                //         return;
-                //     }
+                    // if (eventMessage == null)
+                    // {
+                    //     return;
+                    // }
                 //     await orderService.EventHandling(eventMessage, "stockUpdated");
                 // }
 //             });
@@ -113,15 +113,15 @@ namespace ProductAPI.Messaging
         private IConnection _connection;
         private IModel _channel;
 
-        public RabbitMQConsumer(IServiceProvider serviceProvider)
+        public RabbitMQConsumer(IServiceProvider serviceProvider, IConfiguration configuration)
         {
             _serviceProvider = serviceProvider;
 
             var factory = new ConnectionFactory
             {
-                HostName = "localhost",
-                UserName = "guest",
-                Password = "guest"
+                HostName = configuration.GetSection("RabbitMQ")["HostName"],
+                UserName = configuration.GetSection("RabbitMQ")["UserName"],
+                Password = configuration.GetSection("RabbitMQ")["Password"]
             };
 
             _connection = factory.CreateConnection();
@@ -130,6 +130,9 @@ namespace ProductAPI.Messaging
             // Declare the fanout exchange
             _channel.ExchangeDeclare(exchange: "stockUpdated", type: ExchangeType.Fanout);
             _channel.ExchangeDeclare(exchange: "stockFailed", type: ExchangeType.Fanout);
+
+            //declare queue
+            // _channel.QueueDeclare("demo", false, false, false, null);
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -166,6 +169,20 @@ namespace ProductAPI.Messaging
                     await orderService.EventHandling(eventMessage, "stockFailed");
                 }
             });
+
+            // CreateConsumer("demo", async (message) =>
+            // {
+            // var eventMessage = JsonSerializer.Deserialize<EventDTO>(message);
+            // if (eventMessage == null)
+            // {
+            //     return;
+            // }
+            // // using (var scope = _serviceProvider.CreateScope())
+            // // {
+            // //     var emailService = scope.ServiceProvider.GetRequiredService<IEmailService>();
+            // //     emailService.SendEmail(messages);
+            // // }
+            // });
 
             return Task.CompletedTask;
         }

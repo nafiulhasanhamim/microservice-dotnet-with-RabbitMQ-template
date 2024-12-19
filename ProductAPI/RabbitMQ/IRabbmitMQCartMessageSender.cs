@@ -8,6 +8,6 @@ namespace ProductAPI.RabbitMQ
 {
     public interface IRabbmitMQCartMessageSender
     {
-        void SendMessage(object message, string queueName);
+        void SendMessage(object message, string name, string type);
     }
 }
